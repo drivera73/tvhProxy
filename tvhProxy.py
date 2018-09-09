@@ -10,7 +10,8 @@ app = Flask(__name__)
 
 # URL format: <protocol>://<username>:<password>@<hostname>:<port>, example: https://test:1234@localhost:9981
 config = {
-    'bindAddr': os.environ.get('TVH_BINDADDR') or '',
+    'bindAddr': os.environ.get('TVH_BINDADDR') or '0.0.0.0',
+    'bindPort': os.environ.get('TVH_BINDPORT') or 5004,
     'tvhURL': os.environ.get('TVH_URL') or 'http://test:test@localhost:9981',
     'tvhProxyURL': os.environ.get('TVH_PROXY_URL') or 'http://localhost',
     'tunerCount': os.environ.get('TVH_TUNER_COUNT') or 6,  # number of tuners in tvh
@@ -20,7 +21,7 @@ config = {
 }
 
 discoverData = {
-    'FriendlyName': 'tvhProxy',
+    'FriendlyName': 'TVHeadEnd Proxy',
     'Manufacturer' : 'Silicondust',
     'ModelNumber': 'HDTC-2US',
     'FirmwareName': 'hdhomeruntc_atsc',
@@ -85,5 +86,5 @@ def _get_channels():
 
 
 if __name__ == '__main__':
-    http = WSGIServer((config['bindAddr'], 5004), app.wsgi_app)
+    http = WSGIServer((config['bindAddr'], config['bindPort']), app.wsgi_app)
     http.serve_forever()
