@@ -2,8 +2,8 @@
 Description=A simple proxy for Plex and Tvheadend
 
 [Service]
-Environment=
-WorkingDirectory=/home/tvh/tvhProxy/
+EnvironmentFile=/home/tvh/tvhProxy/tvhProxy.env
+WorkingDirectory=/home/tvh/tvhProxy
 ExecStart=/home/tvh/tvhProxy/venv/bin/python /home/tvh/tvhProxy/tvhProxy.py
 Restart=always
 
