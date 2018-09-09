@@ -86,5 +86,5 @@ def _get_channels():
 
 
 if __name__ == '__main__':
-    http = WSGIServer((config['bindAddr'], config['bindPort']), app.wsgi_app)
+    http = WSGIServer((config['bindAddr'], int(config['bindPort'])), app.wsgi_app)
     http.serve_forever()
